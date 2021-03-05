@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+<head>
+    <style>
+    html,
+    body {
+        height: 100%;
+    }
+
+        .container {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        }
+    </style>
+</head>
+
+{% block content %}
+<body>
+    <div class="container">
+        <div>
+            <form class="form-signin" action="" method="post" novalidate>
+                <h1 class="h3 mb-3 font-weight-normal">Please sign In</h1>
+                <p>New User? <a href="{{ url_for('register') }}">Click to register!</a></p>
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.username.label }}<br>
+                    {{ form.username(size=32) }}
+                    {% for error in form.username.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+                </p>
+                <p>
+                    {{ form.password.label }}<br>
+                    {{ form.password(size=32) }}
+                    {% for error in form.password.errors %}
+                    <span style="color: red;">[{{ error }}]</span>
+                    {% endfor %}
+
+                </p>
+                <p>{{ form.remember_me() }} {{ form.remember_me.label }}</p>
+                <p>{{ form.submit() }}</p>
+            </form>
+        </div>
+    </div>
+</body> 
+{% endblock %}
