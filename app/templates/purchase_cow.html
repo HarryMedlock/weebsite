@@ -1,0 +1,17 @@
+{% extends 'purchase.html' %}
+
+{% block title %}Cow Mask{% endblock %}
+
+{% block description %} Fabric face masks in a fun cow print!<br> <br>
+These cow print face masks brighten up any outfit and are super soft and breathable. <br> <br>
+All masks are two layers thick but can be made thicker on request - just drop me a message or add a note to your order! <br> <br>
+Please note - the pattern on each mask may differ slightly as they're all handmade. {% endblock %}
+
+{% block price %}£5.00{% endblock %}
+
+{% block image_1 %}{{ url_for('static', filename='cow_mask.jpg') }}{% endblock %}
+{% block image_2 %}{{ url_for('static', filename='cow_mask_2.jpg') }}{% endblock %}
+{% block image_3 %}{{ url_for('static', filename='cow_mask_3.jpg') }}{% endblock %}
+{% block image_bot_1 %}{{ url_for('static', filename='cow_mask.jpg') }}{% endblock %}
+{% block image_bot_2 %}{{ url_for('static', filename='cow_mask_2.jpg') }}{% endblock %}
+{% block image_bot_3 %}{{ url_for('static', filename='cow_mask_3.jpg') }}{% endblock %}

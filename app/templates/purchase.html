@@ -1,0 +1,247 @@
+{% extends 'base.html' %}
+
+
+
+{% block content %}
+
+<head>
+  <style>
+    img {
+  max-width: 100%; }
+
+.preview {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+  @media screen and (max-width: 996px) {
+    .preview {
+      margin-bottom: 20px; } }
+
+.preview-pic {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.preview-thumbnail.nav-tabs {
+  border: none;
+  margin-top: 15px; }
+  .preview-thumbnail.nav-tabs li {
+    width: 18%;
+    margin-right: 2.5%; }
+    .preview-thumbnail.nav-tabs li img {
+      max-width: 100%;
+      display: block; }
+    .preview-thumbnail.nav-tabs li a {
+      padding: 0;
+      margin: 0; }
+    .preview-thumbnail.nav-tabs li:last-of-type {
+      margin-right: 0; }
+
+.tab-content {
+  overflow: hidden; }
+  .tab-content img {
+    width: 100%;
+    -webkit-animation-name: opacity;
+            animation-name: opacity;
+    -webkit-animation-duration: .5s;
+            animation-duration: .5s; }
+
+.card {
+  margin-top: 50px;
+  background: #eee;
+  padding: 3em;
+  line-height: 1.5em; }
+
+@media screen and (min-width: 997px) {
+  .wrapper {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex; } }
+
+.details {
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.colors {
+  -webkit-box-flex: 1;
+  -webkit-flex-grow: 1;
+      -ms-flex-positive: 1;
+          flex-grow: 1; }
+
+.product-title, .price, .sizes, .colors {
+  font-weight: bold; }
+
+.checked, .price span {
+  color: #ebc7c7; }
+
+.product-title, .rating, .product-description, .price, .vote, .sizes {
+  margin-bottom: 15px; }
+
+.product-title {
+  margin-top: 0; }
+
+.size {
+  margin-right: 10px; }
+  .size:first-of-type {
+    margin-left: 40px; }
+
+.color {
+  display: inline-block;
+  vertical-align: middle;
+  margin-right: 10px;
+  height: 2em;
+  width: 2em;
+  border-radius: 2px; }
+  .color:first-of-type {
+    margin-left: 20px; }
+
+.add-to-cart, .like {
+  background: #ebc7c7;
+  padding: 1.2em 1.5em;
+  border: none;
+  text-transform: UPPERCASE;
+  font-weight: bold;
+  color: #fff;
+  -webkit-transition: background .3s ease;
+          transition: background .3s ease; }
+  .add-to-cart:hover, .like:hover {
+    background: #e6baba;
+    color: #fff; }
+
+.not-available {
+  text-align: center;
+  line-height: 2em; }
+  .not-available:before {
+    font-family: fontawesome;
+    content: "\f00d";
+    color: #fff; }
+
+.orange {
+  background: #ff9f1a; }
+
+.green {
+  background: #85ad00; }
+
+.blue {
+  background: #0076ad; }
+
+.tooltip-inner {
+  padding: 1.3em; }
+
+@-webkit-keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+
+@keyframes opacity {
+  0% {
+    opacity: 0;
+    -webkit-transform: scale(3);
+            transform: scale(3); }
+  100% {
+    opacity: 1;
+    -webkit-transform: scale(1);
+            transform: scale(1); } }
+  </style>
+</head>
+
+<body class="body">
+    <script src="https://www.paypal.com/sdk/js?client-id=ZVA27M96ZJDF8"></script>
+    <div id="paypal-button-container"></div>
+    <script>
+        paypal.Buttons({
+        createOrder: function(data, actions) {
+          return actions.order.create({
+            purchase_units: [{
+              amount: {
+                value: '0.01'
+              }
+            }]
+          });
+        },
+        onApprove: function(data, actions) {
+          return actions.order.capture().then(function(details) {
+            alert('Transaction completed by ' + details.payer.name.given_name);
+          });
+        }
+      }).render('#paypal-button-container'); // Display payment options on your web page
+    </script>
+
+    <div class="container">
+		<div class="card">
+			<div class="container-fliud">
+				<div class="wrapper row">
+					<div class="preview col-md-6">
+            
+						<div class="preview-pic tab-content">
+						  <div class="tab-pane active" id="pic-1"><img src="{% block image_1 %}{% endblock %}"/></div>
+              <div class="tab-pane" id="pic-2"><img src="{% block image_2 %}{% endblock %}" /></div>
+              <div class="tab-pane" id="pic-3"><img src="{% block image_3 %}{% endblock %}" /></div>
+						</div>
+						<ul class="preview-thumbnail nav nav-tabs">
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{% block image_bot_1 %}{% endblock %}"/></a></li>
+						  <li><a data-target="#pic-2" data-toggle="tab"><img src="{% block image_bot_2 %}{% endblock %}" /></a></li>
+						  <li><a data-target="#pic-3" data-toggle="tab"><img src="{% block image_bot_3 %}{% endblock %}"/></a></li>
+						</ul>
+						
+					</div>
+					<div class="details col-md-6">
+						<h3 class="product-title">{% block title %}{% endblock %}</h3>
+						<p class="product-description">{% block description %}{% endblock %}</p>
+						<h4 class="price">Price: <span>{% block price %}{% endblock %}</span></h4>
+						
+						
+						<div class="action">
+							<button class="add-to-cart btn btn-default" type="button">add to cart</button>
+							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+    <div class="container" style="position: absolute; left: 100px; top: 100px;">
+        {% if current_user.is_authenticated %}
+            <form name="topaypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method='post'>
+                <input type="hidden" name="cmd" value="_xclick-subscriptions">
+                <input type="hidden" name="custom" value="{{session['username']}}"/>
+                <input type="hidden" name="business" value="sb-y7eaz5147941@business.example.com">
+                <input type="hidden" name="item_name" value="pay now">
+                <input type="hidden" name="item_number" value="500">
+                <input type="hidden" name="no_shipping" value="1">
+                <input type="hidden" name="a3" value="10.00">
+                <input type="hidden" name="p3" value="1">
+                <input type="hidden" name="t3" value="M">
+                <input type="hidden" name="src" value="1">
+                <input type="hidden" name="sra" value="1">
+                <input type="hidden" name="return" value="http://104.236.221.91/success/">
+                <input type="hidden" name="cancel_return" value="http://104.236.221.91/">
+                <input type="hidden" name="notify_url" value="http://104.236.221.91/ipn/">
+                <input type="submit" value="Subscribe" name="submit" title="PayPal - The safer, easier way to pay online!" class="btn btn-primary">
+            </form>
+        {% else %}
+            <p>You need to be <a href="{{ url_for('login') }}"><strong>logged in</strong></a> to buy!</p>
+        {% endif %}        
+    </div>
+</body>
+{% endblock %}
