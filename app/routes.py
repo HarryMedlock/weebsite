@@ -73,6 +73,10 @@ def purchase_cow():
 def purchase_boob():
     return render_template('purchase_boob.html')
 
+@app.route('/shop/dino_bag')
+def purchase_dino():
+    return render_template('purchase_boob.html')
+
 #-------- Paypal integration --------#
 
 @app.route('/purchase')
