@@ -1,0 +1,5 @@
+migrations
+venv
+.vscode
+__pycache__
+/bootstrap-4.0.0
