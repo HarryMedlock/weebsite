@@ -165,29 +165,9 @@
   </style>
 </head>
 
-<body class="body">
-    <script src="https://www.paypal.com/sdk/js?client-id=ZVA27M96ZJDF8"></script>
-    <div id="paypal-button-container"></div>
-    <script>
-        paypal.Buttons({
-        createOrder: function(data, actions) {
-          return actions.order.create({
-            purchase_units: [{
-              amount: {
-                value: '0.01'
-              }
-            }]
-          });
-        },
-        onApprove: function(data, actions) {
-          return actions.order.capture().then(function(details) {
-            alert('Transaction completed by ' + details.payer.name.given_name);
-          });
-        }
-      }).render('#paypal-button-container'); // Display payment options on your web page
-    </script>
+<body class="body">    
 
-    <div class="container">
+  <div class="container">
 		<div class="card">
 			<div class="container-fliud">
 				<div class="wrapper row">
@@ -212,7 +192,7 @@
 						
 						
 						<div class="action">
-							<button class="add-to-cart btn btn-default" type="button">add to cart</button>
+							<button class="add-to-cart btn btn-default" id="checkout-button">Checkout</button>
 							<button class="like btn btn-default" type="button"><span class="fa fa-heart"></span></button>
 						</div>
 					</div>
@@ -220,28 +200,16 @@
 			</div>
 		</div>
 	</div>
-    <div class="container" style="position: absolute; left: 100px; top: 100px;">
-        {% if current_user.is_authenticated %}
-            <form name="topaypal" action="https://www.sandbox.paypal.com/cgi-bin/webscr" method='post'>
-                <input type="hidden" name="cmd" value="_xclick-subscriptions">
-                <input type="hidden" name="custom" value="{{session['username']}}"/>
-                <input type="hidden" name="business" value="sb-y7eaz5147941@business.example.com">
-                <input type="hidden" name="item_name" value="pay now">
-                <input type="hidden" name="item_number" value="500">
-                <input type="hidden" name="no_shipping" value="1">
-                <input type="hidden" name="a3" value="10.00">
-                <input type="hidden" name="p3" value="1">
-                <input type="hidden" name="t3" value="M">
-                <input type="hidden" name="src" value="1">
-                <input type="hidden" name="sra" value="1">
-                <input type="hidden" name="return" value="http://104.236.221.91/success/">
-                <input type="hidden" name="cancel_return" value="http://104.236.221.91/">
-                <input type="hidden" name="notify_url" value="http://104.236.221.91/ipn/">
-                <input type="submit" value="Subscribe" name="submit" title="PayPal - The safer, easier way to pay online!" class="btn btn-primary">
-            </form>
-        {% else %}
-            <p>You need to be <a href="{{ url_for('login') }}"><strong>logged in</strong></a> to buy!</p>
-        {% endif %}        
-    </div>
+
+  <script src="https://js.stripe.com/v3/"></script>
+  <script>
+    const checkout_public_key = "{{checkout_public_key}}"; 
+    const checkout_session_id = "{{checkout_session_id}}";
+  </script>
+  <script src="{{ url_for('static', filename='script-no-ajax.js') }}"></script>
+
+  
 </body>
+
+
 {% endblock %}
