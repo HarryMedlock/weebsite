@@ -86,6 +86,16 @@ def purchase_strawb():
 def purchase_cherry():
     return render_template('purchase_cherry.html')
 
+@app.route('/shop/cherry_mask')
+def purchase_cherrymask():
+    return render_template('purchase_cherrymask.html')
+
+@app.route('/shop/cat_bag')
+def purchase_cat():
+    return render_template('purchase_cat.html')
+
+
+
 
 
 #-------- Stripe integration --------#
