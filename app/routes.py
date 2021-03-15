@@ -76,7 +76,7 @@ def purchase_boob():
 
 @app.route('/shop/dino_bag')
 def purchase_dino():
-    return render_template('purchase_boob.html')
+    return render_template('purchase_dino.html')
 
 @app.route('/shop/strawb_bag')
 def purchase_strawb():
