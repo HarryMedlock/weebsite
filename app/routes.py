@@ -82,6 +82,10 @@ def purchase_dino():
 def purchase_strawb():
     return render_template('purchase_strawb.html')
 
+@app.route('/shop/cherry_bag')
+def purchase_cherry():
+    return render_template('purchase_cherry.html')
+
 
 
 #-------- Stripe integration --------#
