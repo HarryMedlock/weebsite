@@ -78,6 +78,12 @@ def purchase_boob():
 def purchase_dino():
     return render_template('purchase_boob.html')
 
+@app.route('/shop/strawb_bag')
+def purchase_strawb():
+    return render_template('purchase_strawb.html')
+
+
+
 #-------- Stripe integration --------#
 
 app.config['STRIPE_PUBLIC_KEY'] = 'pk_test_51IUK8nJ1H5PF7POCiZ4FOfcnrtIGLSCRnsYKBUpaRVRQVNhGRtiCmYEiI02N4UjgWfQyzDYJqL26DFuPv2bN0ash00gqldeuS7'
