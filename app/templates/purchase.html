@@ -202,7 +202,7 @@
 	</div>
 
   <script type="text/javascript">
-    // Create an instance of the Stripe object with your publishable API key
+  //.TODO: dotenv file containing secret and publishable key, don't hardcode keys, use fetch instead. Add to gitignore. 
     var stripe = Stripe("pk_test_51IUK8nJ1H5PF7POCiZ4FOfcnrtIGLSCRnsYKBUpaRVRQVNhGRtiCmYEiI02N4UjgWfQyzDYJqL26DFuPv2bN0ash00gqldeuS7");
     var checkoutButton = document.getElementById("checkout-button");
     checkoutButton.addEventListener("click", function () {
@@ -216,9 +216,7 @@
           return stripe.redirectToCheckout({ sessionId: session.id });
         })
         .then(function (result) {
-          // If redirectToCheckout fails due to a browser or network
-          // error, you should display the localized error message to your
-          // customer using error.message.
+  
           if (result.error) {
             alert(result.error.message);
           }

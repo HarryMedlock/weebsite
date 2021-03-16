@@ -114,6 +114,8 @@ def create_checkout_session():
                         'unit_amount': 500,
                         'product_data': {
                             'name': 'Boob Print Face Mask',
+                            #TODO: Change to display the image of the item you are buying rather than hardcoded 
+                            #image link. Use Jinja templating probably. 
                             'images': ['https://i.imgur.com/EHyR2nP.png'],
                         },
                     },
