@@ -100,26 +100,33 @@ def purchase_cat():
 
 #-------- Stripe integration --------#
 
-app.config['STRIPE_PUBLIC_KEY'] = 'pk_test_51IUK8nJ1H5PF7POCiZ4FOfcnrtIGLSCRnsYKBUpaRVRQVNhGRtiCmYEiI02N4UjgWfQyzDYJqL26DFuPv2bN0ash00gqldeuS7'
-app.config['STRIPE_SECRET_KEY'] = 'sk_test_51IUK8nJ1H5PF7POC8XHabS6WepwvaXjKYPHZmK1Sae0ErRP2hOLzk9seadB0YlvlUoTdJNg32uciVWkpAKmC0si000xhOni4o6'
-stripe.api_key = app.config['STRIPE_SECRET_KEY']
+stripe.api_key = 'sk_test_51IUK8nJ1H5PF7POC8XHabS6WepwvaXjKYPHZmK1Sae0ErRP2hOLzk9seadB0YlvlUoTdJNg32uciVWkpAKmC0si000xhOni4o6'
 
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
-    session = stripe.checkout.Session.create(
-        payment_method_types=['card'],
-        line_items=[{
-            'price': 'price_1IUv0oJ1H5PF7POCbe2HdOPI',
-            'quantity': 1,
-        }],
-        mode='payment',
-        success_url=url_for('success', _external=True) +  '?session_id={CHECKOUT_SESSION_ID}',
-        cancel_url=url_for('cancel', _external=True),
-    )
-    return render_template(
-        'purchase_boob.html', 
-        checkout_session_id=session['id'], 
-        checkout_public_key=app.config['STRIPE_PUBLIC_KEY'])
+    try:
+        checkout_session = stripe.checkout.Session.create(
+            payment_method_types=['card'],
+            line_items=[
+                {
+                    'price_data': {
+                        'currency': 'gbp',
+                        'unit_amount': 500,
+                        'product_data': {
+                            'name': 'Boob Print Face Mask',
+                            'images': ['https://i.imgur.com/EHyR2nP.png'],
+                        },
+                    },
+                    'quantity': 1,
+                },
+            ],
+            mode='payment',
+            success_url='http://127.0.0.1:5000' + '/success',
+            cancel_url='http://127.0.0.1:5000'+ '/cancel',
+        )
+        return jsonify({'id': checkout_session.id})
+    except Exception as e:
+        return jsonify(error=str(e)), 403
 
 @app.route('/success')
 def payment_success():
