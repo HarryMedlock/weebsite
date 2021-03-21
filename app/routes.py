@@ -10,6 +10,7 @@ import stripe
 
 
 
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -100,10 +101,13 @@ def purchase_cat():
 
 #-------- Stripe integration --------#
 
-stripe.api_key = 'sk_test_51IUK8nJ1H5PF7POC8XHabS6WepwvaXjKYPHZmK1Sae0ErRP2hOLzk9seadB0YlvlUoTdJNg32uciVWkpAKmC0si000xhOni4o6'
 
+stripe.api_key = 'sk_test_51IUK8nJ1H5PF7POC8XHabS6WepwvaXjKYPHZmK1Sae0ErRP2hOLzk9seadB0YlvlUoTdJNg32uciVWkpAKmC0si000xhOni4o6'
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
+    # TODO: Create SKU, create function that takes webpage endpoint and calls the correct product from the SKU,
+    # passes the correct information to checkout.session.create(). Change purchase_...() to one route with a variable
+    # endpoint. 
     try:
         checkout_session = stripe.checkout.Session.create(
             payment_method_types=['card'],
@@ -116,7 +120,20 @@ def create_checkout_session():
                             'name': 'Boob Print Face Mask',
                             #TODO: Change to display the image of the item you are buying rather than hardcoded 
                             #image link. Use Jinja templating probably. 
-                            'images': ['https://i.imgur.com/EHyR2nP.png'],
+                            'images': [],
+                        },
+                    },
+                    'quantity': 1,
+                },
+                {
+                    'price_data': {
+                        'currency': 'gbp',
+                        'unit_amount': 500,
+                        'product_data': {
+                            'name': 'Cherry Print Face Mask',
+                            #TODO: Change to display the image of the item you are buying rather than hardcoded 
+                            #image link. Use Jinja templating probably. 
+                            'images': [],
                         },
                     },
                     'quantity': 1,

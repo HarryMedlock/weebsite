@@ -175,19 +175,19 @@
 					<div class="preview col-md-6">
             
 						<div class="preview-pic tab-content">
-						  <div class="tab-pane active" id="pic-1"><img src="{% block image_1 %}{% endblock %}"/></div>
-              <div class="tab-pane" id="pic-2"><img src="{% block image_2 %}{% endblock %}" /></div>
-              <div class="tab-pane" id="pic-3"><img src="{% block image_3 %}{% endblock %}" /></div>
+						  <div class="tab-pane active" id="pic-1"><img src="{{ image_1 }}"/></div>
+              <div class="tab-pane" id="pic-2"><img src="{{ image_2 }}" /></div>
+              <div class="tab-pane" id="pic-3"><img src="{{ image_3 }}" /></div>
 						</div>
 						<ul class="preview-thumbnail nav nav-tabs">
-						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{% block image_bot_1 %}{% endblock %}"/></a></li>
-						  <li><a data-target="#pic-2" data-toggle="tab"><img src="{% block image_bot_2 %}{% endblock %}" /></a></li>
-						  <li><a data-target="#pic-3" data-toggle="tab"><img src="{% block image_bot_3 %}{% endblock %}"/></a></li>
+						  <li class="active"><a data-target="#pic-1" data-toggle="tab"><img src="{{ image_bot_1 }}"/></a></li>
+						  <li><a data-target="#pic-2" data-toggle="tab"><img src="{{ image_bot_2 }}" /></a></li>
+						  <li><a data-target="#pic-3" data-toggle="tab"><img src="{{ image_bot_3 }}"/></a></li>
 						</ul>
 						
 					</div>
 					<div class="details col-md-6">
-						<h3 class="product-title">{% block title %}{% endblock %}</h3>
+						<h3 class="product-title">{{ title }}</h3>
 						<p class="product-description">{% block description %}{% endblock %}</p>
 						<h4 class="price">Price: <span>{% block price %}{% endblock %}</span></h4>
 						
@@ -213,7 +213,7 @@
           return response.json();
         })
         .then(function (session) {
-          return stripe.redirectToCheckout({ sessionId: session.id });
+          return stripe.redirectToCheckout({ sessionId: session.id});
         })
         .then(function (result) {
   
