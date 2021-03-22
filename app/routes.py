@@ -11,6 +11,11 @@ import stripe
 
 
 
+
+
+
+
+
 @app.route('/')
 @app.route('/index')
 def index():
@@ -102,7 +107,6 @@ def purchase_cat():
 #-------- Stripe integration --------#
 
 
-stripe.api_key = 'sk_test_51IUK8nJ1H5PF7POC8XHabS6WepwvaXjKYPHZmK1Sae0ErRP2hOLzk9seadB0YlvlUoTdJNg32uciVWkpAKmC0si000xhOni4o6'
 @app.route('/create-checkout-session', methods=['POST'])
 def create_checkout_session():
     # TODO: Create SKU, create function that takes webpage endpoint and calls the correct product from the SKU,
@@ -121,15 +125,7 @@ def create_checkout_session():
                             #TODO: Change to display the image of the item you are buying rather than hardcoded 
                             #image link. Use Jinja templating probably. 
                             'images': [],
-                        },
-                    },
-                    'quantity': 1,
-                },
-                {
-                    'price_data': {
-                        'currency': 'gbp',
-                        'unit_amount': 500,
-                        'product_data': {
+
                             'name': 'Cherry Print Face Mask',
                             #TODO: Change to display the image of the item you are buying rather than hardcoded 
                             #image link. Use Jinja templating probably. 
@@ -138,6 +134,7 @@ def create_checkout_session():
                     },
                     'quantity': 1,
                 },
+                
             ],
             mode='payment',
             success_url='http://127.0.0.1:5000' + '/success',
