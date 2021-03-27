@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<head>
+    <style>
+        .cart-row {
+            display: flex;
+        }
+        .cart-items {
+            width: 45%;
+        }
+        .cart-item-image {
+            width: 75px;
+            height: auto;
+            border-radius: 10px;
+        }
+        .section-header {
+            font-weight: normal;
+            text-align: center;
+            font-size: 2.5em;
+            line-height: 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="container content-section">
+        <h2 class="section-header">Cart</h2>
+        <div class="container pt-5">
+            <div class="cart-items">
+                <div class="cart-row">
+                    <div class="col-8">
+                        <img class="cart-item-image" src="{{ url_for('static', filename='boob_mask_1.jpg') }}"
+                        width="100" height="100">
+                        <span class="cart-item-title">Boob Print Face Mask</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+{% endblock %}

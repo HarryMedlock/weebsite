@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
-
+<head>
+  <script src="{{ url_for('static', filename='store.js') }}"></script>
+  <script src="https://js.stripe.com/v3/" async></script>
+</head>
 
 {% block content %}
 
@@ -163,8 +166,11 @@
     -webkit-transform: scale(1);
             transform: scale(1); } }
   </style>
-  <script src="https://js.stripe.com/v3/"></script>
+  
+  
 </head>
+
+
 
 <body class="body">    
 
