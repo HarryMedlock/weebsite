@@ -1,2 +1,4 @@
 config.py
 .env
+.DS_Store
+app.db
