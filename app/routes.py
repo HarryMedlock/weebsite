@@ -3,6 +3,7 @@ from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, LoginManager, login_user, logout_user, login_required
 from app.models import User
+from app.inventory import Inventory
 from werkzeug.urls import url_parse
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 import requests
@@ -55,7 +56,8 @@ def logout():
 
 @app.route('/shop')
 def shop():
-    return render_template('shop.html')
+    products = Inventory().get_all()
+    return render_template('shop.html', products=products)
 
 @app.route('/cart/{{ title }}')
 def cart():
