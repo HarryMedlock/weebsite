@@ -199,7 +199,7 @@
 						
 						
 						<div class="action">
-							<button class="add-to-cart btn btn-default" id="checkout-button">Checkout</button>
+							<button onclick="addtoCart({ title }, { price })" type="button" class="btn btn-primary">Add to Cart</button>
 						</div>
 					</div>
 				</div>
@@ -208,6 +208,12 @@
 	</div>
 
   <script type="text/javascript">
+
+  function addtoCart({ title }, { price }) {
+    fetch('/cart/{{ title }}', {
+      method: 'POST',
+    })
+  }
   //.TODO: dotenv file containing secret and publishable key, don't hardcode keys, use fetch instead. Add to gitignore. 
     var stripe = Stripe("pk_test_51IUK8nJ1H5PF7POCiZ4FOfcnrtIGLSCRnsYKBUpaRVRQVNhGRtiCmYEiI02N4UjgWfQyzDYJqL26DFuPv2bN0ash00gqldeuS7");
     var checkoutButton = document.getElementById("checkout-button");

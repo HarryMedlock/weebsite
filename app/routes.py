@@ -55,12 +55,22 @@ def logout():
 
 @app.route('/shop')
 def shop():
-
     return render_template('shop.html')
 
-@app.route('/cart')
+@app.route('/cart/{{ title }}')
 def cart():
+
+    
+
+
+    
     return render_template('cart.html')
+
+
+
+
+
+
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
