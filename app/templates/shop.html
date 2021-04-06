@@ -32,7 +32,7 @@
             <div class="card-body">
               <p class="card-text">{{product.name}}</p>
               <p class="card-text">£{{product.price}}</p><p class="card-text" style="color:green">Free UK Delivery</p>
-              <p><a class="btn btn-md btn-secondary" href="{{ url_for(product.link) }}" role="button">See More</a></p>
+              <p><a class="btn btn-md btn-secondary" href="{{ url_for('add_to_cart', item_id = product.id) }}" role="button">Add to Cart</a></p>
             </div>
           </div>
         </div>

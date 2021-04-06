@@ -8,7 +8,7 @@
             display: flex;
         }
         .cart-items {
-            width: 45%;
+            width: 75%;
         }
         .cart-item-image {
             width: 75px;
@@ -21,22 +21,32 @@
             font-size: 2.5em;
             line-height: 150px;
         }
+        .prices {
+            
+            justify-content: right;
+        }
     </style>
 </head>
 
 <body>
     <section class="container content-section">
         <h2 class="section-header">Cart</h2>
-        <div class="container pt-5">
+        <div class="container">
             <div class="cart-items">
                 <div class="cart-row">
-                    <div class="col-8">
-                        <img class="cart-item-image" src="{{ url_for('static', filename='boob_mask_1.jpg') }}"
-                        width="100" height="100">
-                        <span class="cart-item-title">Boob Print Face Mask</span>
-                    <div class="col-4">
-                        <button></button>
-                    </div>
+                    <div class="col">
+                        {% for item in cart['items'] %}
+                            <tr>{{item['name']}}</tr> 
+                            
+                            <div class="prices">£{{'%.2f' | format(item['price'] | float)}} <hr> </div>
+                            
+                            
+                        {% endfor %}
+
+                        <h4>£{{'%.2f' | format(cart.total|float)}}</h4>
+        
+                        <button>Checkout</button>
+                    
                     </div>
                 </div>
             </div>

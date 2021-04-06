@@ -1,9 +1,10 @@
-from flask import render_template, flash, redirect, url_for, request, make_response, jsonify
+from flask import render_template, flash, redirect, url_for, request, make_response, jsonify, session
 from app import app, db
 from app.forms import LoginForm, RegistrationForm
 from flask_login import current_user, LoginManager, login_user, logout_user, login_required
 from app.models import User
 from app.inventory import Inventory
+from app.cart import Cart
 from werkzeug.urls import url_parse
 from werkzeug.datastructures import ImmutableOrderedMultiDict
 import requests
@@ -54,19 +55,34 @@ def logout():
     logout_user()
     return redirect(url_for('index'))
 
+@app.before_request
+def before_request():
+    if 'cart' not in session:
+        session['cart']=Cart().to_dict()
+
 @app.route('/shop')
 def shop():
     products = Inventory().get_all()
-    return render_template('shop.html', products=products)
+    return render_template('shop.html', products=products, cart=session['cart'])
 
-@app.route('/cart/{{ title }}')
+@app.route('/cart')
 def cart():
 
-    
+    return render_template('cart.html', cart=session['cart'])
 
+@app.route('/cart/add/<item_id>')
+def add_to_cart(item_id):
+    cart = Cart(session['cart'])
+    if cart.change_item(item_id, 'add'):
+        session['cart']=cart.to_dict()
+    return shop()
 
-    
-    return render_template('cart.html')
+@app.route('/cart/remove/<item_id>')
+def remove_from_cart(item_id):
+    cart=Cart(session['cart'])
+    if cart.change_item(item_id, 'remove'):
+        session['cart'] = cart.to_dict()
+    return shop()
 
 
 
