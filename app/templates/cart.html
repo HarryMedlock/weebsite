@@ -8,7 +8,7 @@
             display: flex;
         }
         .cart-items {
-            width: 75%;
+            width: 100%;
         }
         .cart-item-image {
             width: 75px;
@@ -21,9 +21,14 @@
             font-size: 2.5em;
             line-height: 150px;
         }
-        .prices {
+        img {
             
-            justify-content: right;
+            width: 125px;
+            height: 125px;
+        }
+
+        h4 {
+            align-items: right;
         }
     </style>
 </head>
@@ -35,15 +40,33 @@
             <div class="cart-items">
                 <div class="cart-row">
                     <div class="col">
-                        {% for item in cart['items'] %}
-                            <tr>{{item['name']}}</tr> 
-                            
-                            <div class="prices">£{{'%.2f' | format(item['price'] | float)}} <hr> </div>
-                            
-                            
-                        {% endfor %}
+                        <table class="table table-condensed">
+                            <thead>
+                                <tr>
+                                    <th>Description</th>
+                                    <th>Price</th>
+                                    <th></th>
+                                </tr>
+                                
+                                
+                                
+                                {% for item in cart['items'] %}
+                                <tr>
+                                    <th>{{item['name']}}</th>
+                                    <th> £{{'%.2f' | format(item['price'] | float)}}</th>
+                                    <th><button onclick="removefromCart">remove</button></th>
+                                </tr>
+                                {% endfor %}
+                               
+                                
+                            </thead>
+                        </table>
+                        
 
-                        <h4>£{{'%.2f' | format(cart.total|float)}}</h4>
+                        
+                       
+
+                        <h4>£{{'%.2f' | format(cart.total)}}</h4>
         
                         <button>Checkout</button>
                     
@@ -52,5 +75,13 @@
             </div>
         </div>
     </section>
+    <!---TODO: Jinja2 for loop for product in products doesnt work for remove button. Use JS to call the remove_from_cart
+    function and set item_id = product.id inside the JS script instead.-->
+    <script type="text/javascript">
+        function removefromCart(item_id=product.id) {
+            console.log('remove')
+            
+        }
+    </script>
 </body>
 {% endblock %}

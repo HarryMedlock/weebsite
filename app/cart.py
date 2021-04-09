@@ -10,9 +10,11 @@ class Cart(object):
         if cart_dict == {}:
             self.total = 0
             self.items = []
+           
         else: 
             self.total = cart_dict["total"]
             self.items = cart_dict["items"]
+         
         
     def to_dict(self):
 
